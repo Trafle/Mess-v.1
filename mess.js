@@ -24,3 +24,5 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
   console.log('Listening on the port ' + port);
 })
+
+const spellChecker = require('spellchecker');

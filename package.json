@@ -1,0 +1,19 @@
+{
+  "name": "mess",
+  "version": "1.0.0",
+  "description": "messenger here",
+  "main": "mess.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Trafle/Mess"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}

@@ -14,15 +14,23 @@
       #messages li:nth-child(odd) { background: #eee; }
       li {
         background-color: #A9BCF5;
-        text-shadow: 1px 1px 1px grey;
         font-size: 14pt;
         font-family: "Times New Roman";
+        border-radius: 5px;
+        position: relative;
       }
       h1 {
         text-align: center;
         font-family: "Palatino Linotype";
         color: #0431B4;
         font-size: 34pt;
+      }
+      cons {
+        border-radius: 5px;
+        font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;
+        color: #003366;
+        font-size: 12pt;
+        text-shadow: 1px 1px 1px white;
       }
     </style>
   </head>
@@ -36,21 +44,30 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       const socket = io();
-      $('#m').focus();
+
+      $('#m').focus(); //setting cursor on the input line
+
       $('form').submit(() => {
         let msg = $('#m').val();
 
+        msg = msg.replace(/`(.*)`/g, "<cons>$1</cons>");
+        msg = msg.replace(/damn/g, "'deamon'");
+        msg = msg.replace(/shit/g, "'the toilet thing'");
+        msg = msg.replace(/loser/g, "winner");
+        msg = msg.replace(/bye|bye-bye|good-bye|goodbye| good bye/g, "Buenos días");
+        msg = msg.replace(/hello|hi|hey|hi-hi/g, "Bye");
+        msg = msg.replace(/fuck/g, "'heck'");
 
         socket.emit('message', msg);
 
-        $('#messages').prepend('<li style="border-radius: 5px; position: relative">'+ msg + '</li>');
+        $('#messages').append('<li>'+ msg + '</li>');
         $('#m').val('');
         $('#m').focus();
         return false;
 
       })
       socket.on('connection', () =>
-      $('$messages').prepend('<li style="border-radius: 5px; text-align: center"> A new user joined </li>'))
+      $('$messages').append('<li> A new user joined </li>'))
     </script>
   </body>
 </html>
