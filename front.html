@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #819FF7; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 8%; background: #0080FF; border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      li {
+        background-color: #A9BCF5;
+        text-shadow: 1px 1px 1px grey;
+        font-size: 14pt;
+        font-family: "Times New Roman";
+      }
+      h1 {
+        text-align: center;
+        font-family: "Palatino Linotype";
+        color: #0431B4;
+        font-size: 34pt;
+      }
+    </style>
+  </head>
+  <body style="background-color: #EFF8FB">
+    <h1 id="pidar">Mess</h1>
+    <ul id="messages"></ul>
+    <form class="form-control">
+      <input id="m" autocomplete="off"><button class="btn btn-primary btn-sm">Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      const socket = io();
+      $('#m').focus();
+      $('form').submit(() => {
+        let msg = $('#m').val();
+
+
+        socket.emit('message', msg);
+
+        $('#messages').prepend('<li style="border-radius: 5px; position: relative">'+ msg + '</li>');
+        $('#m').val('');
+        $('#m').focus();
+        return false;
+
+      })
+      socket.on('connection', () =>
+      $('$messages').prepend('<li style="border-radius: 5px; text-align: center"> A new user joined </li>'))
+    </script>
+  </body>
+</html>
